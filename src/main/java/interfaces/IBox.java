@@ -1,6 +1,7 @@
+package interfaces;
 import java.awt.Color;
 
-public class Box {
+public class IBox {
 	
 	private Color color;
 	private int position;
@@ -13,18 +14,18 @@ public class Box {
 		return true;
 	}
 	
-	public Box() {
+	public IBox() {
 		this.position = 0;
 	}
 	
-	public Box(int _position) {
+	public IBox(int _position) {
 		if (!validPosition(_position)){
 			return;
 		}
 		this.position = _position;
 	}
 	
-	public Box(int _position, Color _color) {
+	public IBox(int _position, Color _color) {
 		if (!validPosition(_position)){
 			return;
 		}

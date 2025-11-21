@@ -1,21 +1,23 @@
+package interfaces;
 import java.util.List;
 
 public class StorageSystem {
 
-	private Box[] boxStorage;
-	private Robot robot;
-	private ConveyerBelt conveyerBelt;
+	private IBox[] boxStorage;
+	private IRobot robot;
+	private IConveyerBelt conveyerBelt;
 		
-	public StorageSystem(Robot _robot, ConveyerBelt _conveyerBelt) {
+	public StorageSystem(IRobot _robot, IConveyerBelt _conveyerBelt) {
 		
 		this.robot = _robot;
 		this.conveyerBelt = _conveyerBelt;
-		this.boxStorage = new Box[] {};
+		this.boxStorage = new IBox[] {};
 	}
 	
 	public boolean setup() {
 		//setup robot and conveyerbelt
-		return (this.robot.setup() && this.conveyerBelt.setup());
+		//return (this.robot.setup() && this.conveyerBelt.setup());
+		return true;
 	}
 	
 	public boolean loadNextBox() {
@@ -28,12 +30,12 @@ public class StorageSystem {
 		return this.conveyerBelt.boxLoaded();
 	}
 	
-	public Box scanBox() {
+	public IBox scanBox() {
 		//scan the color of the box and return a box object
 		return this.conveyerBelt.scanBox();
 	}
 	
-	public boolean store(Box _box, int _position) {
+	public boolean store(IBox _box, int _position) {
 		//store a box in storage at given position
 		if (this.boxStorage[_position] != null) {
 			System.out.println("There is already a box at postion " + _position );
@@ -49,7 +51,7 @@ public class StorageSystem {
 		return true;
 	}
 	
-	public Box unstore(int _position) {
+	public IBox unstore(int _position) {
 		//unstore box and load it onto the conveyerbelt
 		if (this.boxLoaded()) {
 			System.out.println("A box is already on the conveyer belt can not unload a box from storage");
@@ -60,7 +62,7 @@ public class StorageSystem {
 			return null;
 		}
 		this.robot.unstore(_position);
-		Box unloadedBox = this.boxStorage[_position];
+		IBox unloadedBox = this.boxStorage[_position];
 		this.boxStorage[_position] = null;
 		return unloadedBox;
 	}	

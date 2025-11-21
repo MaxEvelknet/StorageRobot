@@ -1,5 +1,6 @@
+package interfaces;
 
-public interface Robot {
+public interface IRobot {
 	
 	public boolean setup();
 	
