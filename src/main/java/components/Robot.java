@@ -1,21 +1,28 @@
 package components;
+
 import interfaces.IRobot;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.hardware.ev3.*;
 import lejos.hardware.ev3.LocalEV3;
+
 public class Robot implements IRobot{
 
-	private EV3LargeRegulatedMotor turnMotor;
-	private EV3LargeRegulatedMotor YMotor;
-	private EV3 ev3;
-	private EV3TouchSensor yMax;
-	private EV3TouchSensor rotMax;
+	private Axis a1;
+	private Axis a2;
+	
 	@Override
 	public boolean setup() {
-		ev3 = LocalEV3.get();
 		
-		turnMotor = new EV3LargeRegulatedMotor(ev3.getPort("D"));
+		this.a1 = new Axis();
+		this.a2 = new Axis();
+		this.a1.setup("D", "S1");
+		this.a2.setup("C", "S3");
+		
+		this.a1.moveToLimit();
+		this.a2.moveToLimit();
+		
+		/*turnMotor = new EV3LargeRegulatedMotor(ev3.getPort("D"));
 		turnMotor.setSpeed(200);
 		YMotor = new EV3LargeRegulatedMotor(ev3.getPort("C"));
 		YMotor.setSpeed(200);
@@ -42,18 +49,16 @@ public class Robot implements IRobot{
 		}
 		turnMotor.stop();
 		
-		return false;
+		return false;*/
 	}
 
 	@Override
 	public void store(int _position) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void unstore(int _position) {
-		// TODO Auto-generated method stub
 		
 	}
 	
