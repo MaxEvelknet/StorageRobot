@@ -2,7 +2,13 @@ package interfaces;
 
 public interface IRobot {
 	
-	public boolean setup(String motorPort1, String motorPort2, String motorPort3, String sensorPort1, String sensorPort2);
+	public boolean setup(
+			String motorA1Port,
+			String motorA2Port,
+			String motorGripperPort,
+			String sensorA1Port,
+			String sensorA2Port
+			);
 	
 	public void store(int _position);
 	
