@@ -11,6 +11,12 @@ public class Robot implements IRobot{
 	private Axis a1;
 	private Axis a2;
 	private Gripper gripper;
+	private float positions[4][2] ={
+		{0.0f, 0.0f},
+		{0.0f, 200.0f},
+		{-350.0f, 300.0f},
+		{-700.0f, 300.0f}
+	};
 	
 	@Override
 	public boolean setup() {
@@ -25,19 +31,42 @@ public class Robot implements IRobot{
 	}
 
 	@Override
-	public void store(int _position) {
-		
+	public void store(int position) {
+		this.moveToPosition(0);
+		this.gripper.open();
+
+		this.moveToPosition(1);
+		this.gripper.close();
+
+		this.a2.moveToPosition(positions[0][1]);
+
+		this.moveToPosition(position);
+		this.gripper.open();
+
+		this.moveToPosition(0);
 	}
 
 	@Override
-	public void unstore(int _position) {
-		
+	public void unstore(int position) {
+		this.moveToPosition(0);
+		this.gripper.open();
+
+		this.moveToPosition(position);
+		this.gripper.close();
+
+		this.a2.moveToPosition(positions[0][1]);
+
+		this.moveToPosition(1);
+		this.gripper.open();
+
+		this.moveToPosition(0);
 	}
 
+
 	@Override
-	public void moveToPosition(int _position) {
-		
+	public void moveToPosition(int position) {
+		this.a2.moveTo(positions[position][1]);
+		this.a1.moveTo(positions[position][0]);
 	}
-	
 	
 }
