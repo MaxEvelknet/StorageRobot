@@ -1,9 +1,9 @@
 package interfaces;
 
-import java.awt.Color;
+import lejos.robotics.Color;
 
 public interface IColorSensor{
 	public boolean setup(String sensorPort);
 	
-	public Color scanColor();
+	public int scanColor();
 }
