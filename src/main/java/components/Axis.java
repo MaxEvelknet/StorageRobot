@@ -6,32 +6,47 @@ public class Axis implements IAxis{
 	
 	private Motor motor;
 	private TouchSensor limitSwitch;
+	private final int speed = 200;
+	private final MotorType motorType = MotorType.LARGE;
+	
 	
 	@Override
-	public boolean setup(String motorPort, String sensorPort) {
+	public boolean setup(String motorPort, String sensorPort, Direction direction) {
+		
 		motor = new Motor();
-		motor.setup(motorPort);
+		motor.setup(motorPort, speed, motorType);
 		limitSwitch = new TouchSensor();
 		limitSwitch.setup(sensorPort);
+		
+		this.moveToLimit(direction);
+		
 		return false;
 	}
 
 	@Override
-	public void moveToLimit() {
+	public void moveToLimit(Direction direction) {
 		if (limitSwitch.isPressed()) {
-			motor.stop();
 			return;
 		}
-		motor.moveForward();
+		
+		if (direction == Direction.FORWARD) {
+			motor.moveForward();
+		}else if (direction == Direction.BACKWARD) {
+			motor.moveBackward();
+		} else {
+			return;
+		}
+		
 		while (!limitSwitch.isPressed()) {
 			//wait until the limit switch is pressed
 		}
 		motor.stop();
-		return
+		return;
 	}
 
 	@Override
-	public void move() {
-		return
+	public void moveToPosition(float degree) {
+		this.motor.moveToPosition(degree);
+		return;
 	}
 }

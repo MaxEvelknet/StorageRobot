@@ -4,10 +4,11 @@ public interface IAxis{
 	
 	public boolean setup(
 			String motorPort,
-			String sensorPort
+			String sensorPort,
+			Direction direction
 			);
 	
-	public void moveToLimit();
+	public void moveToLimit(Direction direction);
 	
-	public void moveToPosition(int position);
+	public void moveToPosition(float degree);
 }
