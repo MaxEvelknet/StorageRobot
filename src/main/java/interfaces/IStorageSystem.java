@@ -1,7 +1,18 @@
 package interfaces;
 
+import interfaces.IBox;
+
 public interface IStorageSystem{
-	public boolean setup();
+	public boolean setup(
+			String motorA1Port,
+			String motorA2Port,
+			String motorGripperPort,
+			String motorBeltPort,
+			String sensorA1Port,
+			String sensorA2Port,
+			String sensorColorPort,
+			String sensorDistancePort
+	);
 
 	public boolean loadNextBox();
 

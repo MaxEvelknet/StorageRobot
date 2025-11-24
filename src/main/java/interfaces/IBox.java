@@ -4,6 +4,8 @@ import java.awt.Color;
 
 public interface IBox{
 	
+	public boolean setup();
+	
 	public void setColor(Color _color);
 	
 	public Color getColor();
