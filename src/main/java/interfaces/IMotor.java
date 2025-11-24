@@ -8,4 +8,8 @@ public interface IMotor() {
 	public void moveBackward();
 	
 	public void stop();
+	
+	public int getCurrentPosition();
+	
+	public void moveToPosition(int degree);	
 }

@@ -7,5 +7,4 @@ public interface IGripper {
 	public void open();
 	
 	public void close();
-	
 }
