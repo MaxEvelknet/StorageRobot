@@ -1,17 +1,30 @@
 package components;
 
 import interfaces.IMotor;
+import interfaces.MotorType;
 
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.motor.EV3MediumRegulatedMotor;
+import lejos.hardware.motor.BaseRegulatedMotor;
+import lejos.hardware.ev3.EV3;
 import lejos.hardware.ev3.LocalEV3;
 
 public class Motor implements IMotor{
-	private EV3LargeRegulatedMotor motor;
-	
+	private BaseRegulatedMotor motor;
+	private EV3 ev3;
+
 	@Override
-	public boolean setup(String motorPort) {
-		this.motor = new EV3LargeRegulatedMotor(LocalEV3.get().getPort(motorPort));
-		this.motor.setSpeed(200);
+	public boolean setup(String motorPort, int speed, MotorType type) {
+		this.ev3 = LocalEV3.get();
+		
+		if (type == MotorType.MEDIUM) {
+			this.motor = new EV3MediumRegulatedMotor(ev3.getPort(motorPort));
+		}else if (type == MotorType.LARGE) {
+			this.motor = new EV3LargeRegulatedMotor(ev3.getPort(motorPort));
+		} else {
+			return false; // Unsupported motor type
+		}
+		this.motor.setSpeed(speed);
 		return true;
 	}
 	
@@ -28,5 +41,17 @@ public class Motor implements IMotor{
 	@Override
 	public void stop() {
 		this.motor.stop();
+	}
+	
+	@Override
+	public float getCurrentPosition() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void moveToPosition(float degree) {
+		// TODO Auto-generated method stub
+		
 	}
 }
