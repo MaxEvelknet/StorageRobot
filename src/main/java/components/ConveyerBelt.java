@@ -38,7 +38,7 @@ public class ConveyerBelt implements IConveyerBelt{
 	public boolean loadNextBox() {	
 		if (this.IRSensor.isBoxDetected(this.treshold))
 		{
-			return tur; //box already present
+			return true; //box already present
 		}
 		this.beltMotor.moveForward();
 		

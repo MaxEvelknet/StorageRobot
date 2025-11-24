@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface IMotor() {
+public interface IMotor {
 	public boolean setup(String motorPort);
 	
 	public void moveForward();

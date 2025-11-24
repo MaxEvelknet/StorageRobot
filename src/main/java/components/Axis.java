@@ -9,11 +9,17 @@ public class Axis implements IAxis{
 	
 	@Override
 	public boolean setup(String motorPort, String sensorPort) {
-		motor = new Motor();
-		motor.setup(motorPort);
-		limitSwitch = new TouchSensor();
-		limitSwitch.setup(sensorPort);
-		return false;
+		try {
+			motor = new Motor();
+			motor.setup(motorPort);
+			limitSwitch = new TouchSensor();
+			limitSwitch.setup(sensorPort);
+			return true;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
 	}
 
 	@Override
@@ -27,11 +33,11 @@ public class Axis implements IAxis{
 			//wait until the limit switch is pressed
 		}
 		motor.stop();
-		return
+		return;
 	}
 
 	@Override
 	public void move() {
-		return
+		return;
 	}
 }
