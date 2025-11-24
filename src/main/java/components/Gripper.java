@@ -18,9 +18,6 @@ public class Gripper implements IGripper{
 		this.motor.moveToPosition(300);
 		this.closedPosition = motor.getCurrentPosition();
 		this.closed = true;
-		//Needs be implemented
-		//Set closed position
-		//Move until hits a physical stop
 		this.openPosition = this.closedPosition + openOffset; // opening position
 		return true;
 	}
