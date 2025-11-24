@@ -2,7 +2,7 @@ package components;
 
 import interfaces.IColorSensor;
 
-import java.awt.Color;
+import lejos.robotics.Color;
 
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.ev3.LocalEV3;
@@ -14,11 +14,12 @@ public class ColorSensor implements IColorSensor{
 	@Override
 	public boolean setup(String sensorPort) {
 		this.colorSensor = new EV3ColorSensor(LocalEV3.get().getPort(sensorPort));
+		this.colorSensor.setCurrentMode(this.colorSensor.getColorIDMode().getName());
 		return true;
 	}
 	
 	@Override
-	public Color getColor() {
-		return Color.RED; // Placeholder implementation
+	public int scanColor() {
+		return this.colorSensor.getColorID();
 	}
 }
