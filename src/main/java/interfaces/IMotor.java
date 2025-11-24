@@ -9,7 +9,7 @@ public interface IMotor() {
 	
 	public void stop();
 	
-	public int getCurrentPosition();
+	public float getCurrentPosition();
 	
-	public void moveToPosition(int degree);	
+	public void moveToPosition(float degree);	
 }
