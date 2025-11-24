@@ -50,6 +50,7 @@ public class Robot implements IRobot{
 		turnMotor.stop();
 		
 		return false;*/
+		return true;
 	}
 
 	@Override

@@ -10,6 +10,7 @@ public class Axis implements IAxis{
 	private final int speed = 200;
 	
 	@Override
+<<<<<<< HEAD
 	public boolean setup(String motorPort, String sensorPort, Direction direction) {
 		
 		motor = new Motor();
@@ -20,6 +21,20 @@ public class Axis implements IAxis{
 		this.moveToLimit(direction);
 		
 		return false;
+=======
+	public boolean setup(String motorPort, String sensorPort) {
+		try {
+			motor = new Motor();
+			motor.setup(motorPort);
+			limitSwitch = new TouchSensor();
+			limitSwitch.setup(sensorPort);
+			return true;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+>>>>>>> refs/remotes/origin/devFlo
 	}
 
 	@Override
@@ -44,8 +59,12 @@ public class Axis implements IAxis{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void moveToPosition(float degree) {
 		this.motor.moveToPosition(degree);
+=======
+	public void move() {
+>>>>>>> refs/remotes/origin/devFlo
 		return;
 	}
 }
