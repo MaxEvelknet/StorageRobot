@@ -20,6 +20,7 @@ public class Axis implements IAxis{
 		this.moveToLimit(direction);
 		
 		return false;
+	}
 
 	@Override
 	public void moveToLimit(Direction direction) {
