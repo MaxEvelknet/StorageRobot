@@ -5,5 +5,5 @@ public interface IAxis{
 	
 	public void moveToLimit();
 	
-	public void move();
+	public void moveToPosition(int position);
 }
