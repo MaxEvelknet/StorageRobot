@@ -13,4 +13,6 @@ public interface IMotor {
 	public float getCurrentPosition();
 	
 	public void moveToPosition(float degree);	
+	
+	public void moveToAbsolutePosition(float degree);
 }

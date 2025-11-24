@@ -45,7 +45,6 @@ public class Motor implements IMotor{
 	
 	@Override
 	public float getCurrentPosition() {
-		// TODO Auto-generated method stub
 		return this.motor.getTachoCount();
 	}
 
@@ -54,5 +53,10 @@ public class Motor implements IMotor{
 		int pos = this.motor.getTachoCount();
 		int relativeDegree = pos+(int)degree;
 		this.motor.rotateTo(relativeDegree);
+	}
+	
+	public void moveToAbsolutePosition(float degree)
+	{
+		this.motor.rotateTo((int)degree);
 	}
 }

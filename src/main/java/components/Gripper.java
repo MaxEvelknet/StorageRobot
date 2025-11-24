@@ -1,5 +1,4 @@
 package components;
-
 import interfaces.*;
 
 public class Gripper implements IGripper{
@@ -7,8 +6,8 @@ public class Gripper implements IGripper{
 	private IMotor motor;
 	private float openPosition;
 	private float closedPosition;
-	private final int speed = 50;
-	private final float openOffset = 100f;
+	private final int speed = 200;
+	private final float openOffset = -90f;
 	private boolean closed;
 	
 	@Override
@@ -22,7 +21,7 @@ public class Gripper implements IGripper{
 		//Needs be implemented
 		//Set closed position
 		//Move until hits a physical stop
-		this.openPosition = this.openPosition + openOffset; // opening position
+		this.openPosition = this.closedPosition + openOffset; // opening position
 		return true;
 	}
 	
@@ -30,7 +29,7 @@ public class Gripper implements IGripper{
 	public void open() {
 		if(closed)
 		{
-			motor.moveToPosition(openOffset);
+			motor.moveToAbsolutePosition(openPosition);
 			closed = false;
 		}
 	}
@@ -39,7 +38,7 @@ public class Gripper implements IGripper{
 	public void close() {
 		if(!closed)
 		{
-			motor.moveToPosition(-openOffset);
+			motor.moveToAbsolutePosition(closedPosition);
 			closed = true;
 		}
 	}
