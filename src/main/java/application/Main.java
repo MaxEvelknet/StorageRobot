@@ -1,9 +1,7 @@
-import components.ConveyerBelt;
-import components.Robot;
-import interfaces.IBox;
-import interfaces.IConveyerBelt;
-import interfaces.IRobot;
-import interfaces.StorageSystem;
+package application;
+
+import components.*;
+import interfaces.*;
 
 public class Main {
 
@@ -13,20 +11,20 @@ public class Main {
 		
 		
 		//Storage System Setup
-		/*Motor m1 = new Motor();
+		Motor m1 = new Motor();
 		Motor m2 = new Motor();
 		Motor m3 = new Motor();
 		ColorSensor b1 = new ColorSensor();
-		DistanceSensor b2 = new DistanceSensor();
-		ContactSensor b3 = new ContactSensor();
-		ContactSensoor b4 = new ContactSensor();
+		IRSensor b2 = new IRSensor();
+		TouchSensor b3 = new TouchSensor();
+		TouchSensor b4 = new TouchSensor();
 		Gripper gripper = new Gripper();
-		Axis a1 = new axis();
-		Axis a2 = new axis();*/
+		Axis a1 = new Axis();
+		Axis a2 = new Axis();
 		
-		/*
-		IConveyerBelt conveyerBelt = new IConveyerBelt();
-		IRobot robot = new IRobot();
+		
+		IConveyerBelt conveyerBelt = new ConveyerBelt();
+		IRobot robot = new Robot();
 		StorageSystem storageBot = new StorageSystem(robot, conveyerBelt);		
 		
 		//loop
@@ -36,7 +34,7 @@ public class Main {
 				IBox box = storageBot.scanBox();
 				storageBot.store(box, 1);
 			}			
-		}*/
+		}
 		ConveyerBelt belt = new ConveyerBelt();
 		Robot bot = new Robot();
 		bot.setup();
