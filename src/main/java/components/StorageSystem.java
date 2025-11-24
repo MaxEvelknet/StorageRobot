@@ -1,40 +1,46 @@
-package interfaces;
-import java.util.List;
+package components;
 
-public class StorageSystem {
+import interfaces.*;
+
+public class StorageSystem implements IStorageSystem{
 
 	private IBox[] boxStorage;
 	private IRobot robot;
 	private IConveyerBelt conveyerBelt;
-		
+	
+	
 	public StorageSystem(IRobot _robot, IConveyerBelt _conveyerBelt) {
-		
 		this.robot = _robot;
 		this.conveyerBelt = _conveyerBelt;
 		this.boxStorage = new IBox[] {};
 	}
 	
+	@Override
 	public boolean setup() {
 		//setup robot and conveyerbelt
 		//return (this.robot.setup() && this.conveyerBelt.setup());
 		return true;
 	}
-	
+
+	@Override
 	public boolean loadNextBox() {
 		//load box onto position
 		return this.conveyerBelt.loadNextBox();
 	}
-	
+
+	@Override
 	public boolean boxLoaded(){
 		//check if a box is loaded
 		return this.conveyerBelt.boxLoaded();
 	}
-	
+
+	@Override
 	public IBox scanBox() {
 		//scan the color of the box and return a box object
 		return this.conveyerBelt.scanBox();
 	}
-	
+
+	@Override
 	public boolean store(IBox _box, int _position) {
 		//store a box in storage at given position
 		if (this.boxStorage[_position] != null) {
@@ -51,6 +57,7 @@ public class StorageSystem {
 		return true;
 	}
 	
+	@Override
 	public IBox unstore(int _position) {
 		//unstore box and load it onto the conveyerbelt
 		if (this.boxLoaded()) {

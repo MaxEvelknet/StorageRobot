@@ -7,5 +7,4 @@ public interface IRobot {
 	public void store(int _position);
 	
 	public void unstore(int _position);
-
 }
