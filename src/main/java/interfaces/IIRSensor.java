@@ -5,5 +5,5 @@ public interface IIRSensor {
 	
 	float getDistance();
 	
-	boolean isBoxDetected(float threshold);
+	boolean isBoxDetected(float threshold, int dir);
 }

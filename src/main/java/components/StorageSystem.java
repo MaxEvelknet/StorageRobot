@@ -8,17 +8,39 @@ public class StorageSystem implements IStorageSystem{
 	private IRobot robot;
 	private IConveyerBelt conveyerBelt;
 	
-	
-	public StorageSystem(IRobot _robot, IConveyerBelt _conveyerBelt) {
-		this.robot = _robot;
-		this.conveyerBelt = _conveyerBelt;
-		this.boxStorage = new IBox[] {};
-	}
-	
 	@Override
-	public boolean setup() {
-		//setup robot and conveyerbelt
-		//return (this.robot.setup() && this.conveyerBelt.setup());
+	public boolean setup(
+			String motorA1Port,
+			String motorA2Port,
+			String motorgripperPort,
+			String motorBeltPort,
+			String sensorColorPort,
+			String sensorA1Port,
+			String sensorDistancePort,
+			String sensorA2Port
+			)
+	{
+		
+		this.robot = new Robot();
+		this.conveyerBelt = new ConveyerBelt();
+		
+		this.robot.setup(
+				motorA1Port,
+				motorA2Port,
+				motorgripperPort,
+				sensorA1Port,
+				sensorA2Port
+				);
+		this.conveyerBelt.setup(
+				motorBeltPort,
+				sensorDistancePort,
+				sensorColorPort
+				);
+		
+		this.boxStorage = new IBox[2];
+		this.boxStorage[0] = null;
+		this.boxStorage[1] = null;
+		
 		return true;
 	}
 
@@ -40,37 +62,44 @@ public class StorageSystem implements IStorageSystem{
 		return this.conveyerBelt.scanBox();
 	}
 
-	@Override
-	public boolean store(IBox _box, int _position) {
+	@Override	
+	public IBox store(int _position) {
 		//store a box in storage at given position
 		if (this.boxStorage[_position] != null) {
 			System.out.println("There is already a box at postion " + _position );
-			return false;
+			return null;
 		}
-		if (_position <= 0) {
+		if (_position <= 0 || _position >= this.boxStorage.length) {
 			System.out.println("Invalid position . There is no storage at" + _position );
-			return false;			
+			return null;			
 		}
-		this.robot.store(_position);
-		_box.store(_position);
-		this.boxStorage[_position] = _box;
-		return true;
+		
+		this.loadNextBox();
+		this.boxStorage[_position] = this.scanBox();
+		this.robot.store(_position);	
+		return this.boxStorage[_position];
 	}
 	
 	@Override
 	public IBox unstore(int _position) {
-		//unstore box and load it onto the conveyerbelt
-		if (this.boxLoaded()) {
-			System.out.println("A box is already on the conveyer belt can not unload a box from storage");
-			return null;
-		}
+		//store a box in storage at given position
 		if (this.boxStorage[_position] == null) {
-			System.out.println("There is no box avaiable at position " + _position);
+			System.out.println("There is no box at postion " + _position );
 			return null;
 		}
+		if (_position <= 0 || _position >= this.boxStorage.length) {
+			System.out.println("Invalid position . There is no storage at" + _position );
+			return null;			
+		}
+		if(this.boxLoaded()) {
+			System.out.println("There is already a box on the conveyer belt" );
+			return null;	
+		}
+		
+		IBox box = this.boxStorage[_position];
 		this.robot.unstore(_position);
-		IBox unloadedBox = this.boxStorage[_position];
+		this.conveyerBelt.unstoreBox();
 		this.boxStorage[_position] = null;
-		return unloadedBox;
+		return box;
 	}	
 }

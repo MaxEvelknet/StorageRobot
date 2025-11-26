@@ -7,12 +7,14 @@ public interface IConveyerBelt {
 	public boolean setup(
 			String motorPort,
 			String sensorColorPort,
-			String sensorDistancePort,
-			float treshold);
+			String sensorDistancePort
+			);
 	
 	public boolean loadNextBox();
 	
 	public boolean boxLoaded();
 	
 	public IBox scanBox();
+	
+	public void unstoreBox();
 }

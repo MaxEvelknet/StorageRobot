@@ -23,8 +23,12 @@ public class IRSensor implements IIRSensor{
 	}
 	
 	@Override
-	public boolean isBoxDetected(float threshold) {
+	public boolean isBoxDetected(float threshold, int dir) {
 		float distance = this.getDistance();
-		return distance < threshold && distance != 0;
+		
+		if (dir == 0) {
+			return distance < threshold && distance != 0;
+		}
+		return distance > threshold && distance != 0;
 	}
 }
